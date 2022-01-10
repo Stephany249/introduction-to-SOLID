@@ -1,0 +1,207 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "User Documentation",
+    "description": "This is an API Rent",
+    "version": "1.0.0"
+  },
+  "paths":{
+    "/users":{
+        "post":{
+            "tags":["Users"],
+            "summary":"Create a user",
+            "description":"Create a new user",
+            "requestBody":{
+               "content":{
+                   "application/Json":{
+                       "schema":{
+                           "type": "object",
+                           "properties": {
+                               "name":{
+                                   "type": "string"
+                               },
+                               "email":{
+                                   "type": "string"
+                               }
+                           }, 
+                           "example":{
+                               "name":"User name", 
+                               "email":"user_email@gmail.com"
+                           }
+                       }
+                   }
+               }
+            },
+            "responses":{
+                "201":{
+                  "description":"User created",
+                  "content":{
+                    "application/Json":{
+                      "example": {
+                        "id": "fa5358be-bdec-43a1-add8-9dc6e5e84762",
+                        "admin": false,
+                        "name": "Stephany",
+                        "email": "tete.1818@hotmail.com",
+                        "created_at": "2022-01-10T18:52:36.972Z",
+                        "updated_at": "2022-01-10T18:52:36.972Z"
+                      }
+                    }
+                  }
+                },
+                "400":{ 
+                    "description":"E-mail já em uso"
+                }
+            }
+        },
+        "get":{
+            "tags":["Users"],
+            "sumary":"List All Users",
+            "description":"List All Users",
+            "parameters":[{
+                "in":"header",
+                "name":"user_id",
+                "type":"string",
+                "required":"true"
+            }],
+            "responses":{
+                "201":{
+                    "description":"Success!",
+                    "content":{
+                        "application/Json":{
+                            "schema":{
+                                "type":"array",
+                                "items":{
+                                    "type":"object",
+                                    "properties":{
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "admin": {
+                                        "type": "boolean"
+                                      },
+                                        "name":{
+                                            "type":"string"
+                                      },
+                                      "email":{
+                                          "type":"string"
+                                      },
+                                      "created_at": {
+                                        "type": "string"
+                                      },
+                                      "updated_at": {
+                                        "type": "string"
+                                      }
+                                    }
+                                }
+                            },
+                            "example": [
+                              {
+                                "id": "fa5358be-bdec-43a1-add8-9dc6e5e84762",
+                                "admin": true,
+                                "name": "Stephany",
+                                "email": "tete.1818@hotmail.com",
+                                "created_at": "2022-01-10T18:52:36.972Z",
+                                "updated_at": "2022-01-10T18:52:48.613Z"
+                              }
+                          ]
+                        }
+                    }
+                    
+                }
+            }
+        }
+    },
+    "/users/{user_id}":{
+        "get":{
+            "tags":["Users"],
+            "sumary":"List User Profile",
+            "description":"List User Profile",
+            "parameters":[{
+                "in":"path",
+                "name":"user_id",
+                "type":"string",
+                "required":"true"
+            }],
+            "responses":{
+                "201":{
+                    "description":"Success!",
+                    "content":{
+                        "application/Json":{
+                            "schema":{
+                                "type":"array",
+                                "items":{
+                                    "type":"object",
+                                    "properties":{
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "admin": {
+                                        "type": "boolean"
+                                      },
+                                        "name":{
+                                            "type":"string"
+                                      },
+                                      "email":{
+                                          "type":"string"
+                                      },
+                                      "created_at": {
+                                        "type": "string"
+                                      },
+                                      "updated_at": {
+                                        "type": "string"
+                                      }
+                                    }
+                                }
+                            },
+                            "example": {
+                              "id": "fa5358be-bdec-43a1-add8-9dc6e5e84762",
+                              "admin": true,
+                              "name": "Stephany",
+                              "email": "tete.1818@hotmail.com",
+                              "created_at": "2022-01-10T18:52:36.972Z",
+                              "updated_at": "2022-01-10T18:52:48.613Z"
+                            }
+                        }
+                    }
+                    
+                }
+            }
+        
+
+        }
+    },
+    "/users/{user_id}/admin":{
+        "patch":{
+            "tags":["Users"],
+            "summary":"Turn a Admin User",
+            "description":"Turn a Admin User",
+            "parameters":[{
+                "in":"path",
+                "name":"user_id",
+                "type":"string",
+                "required":"true"
+            }],
+            "responses":{
+                "200":{
+                    "description":"User updated to Admin",
+                   "content":{
+                      "application/Json":{
+                        "example": {
+                          "id": "fa5358be-bdec-43a1-add8-9dc6e5e84762",
+                          "admin": true,
+                          "name": "Stephany",
+                          "email": "tete.1818@hotmail.com",
+                          "created_at": "2022-01-10T18:52:36.972Z",
+                          "updated_at": "2022-01-10T18:52:36.972Z"
+                        }
+                      }
+                    }
+                },
+                "400":{ 
+                    "description":"No updates user admin"
+                }
+            }
+         }  
+    }
+}
+}
